@@ -976,7 +976,7 @@ class BlinkGlance extends LitElement {
         // on click
         this._v.imageClick = config.image_click ? config.image_click : false;
 
-        // stream directly from Arlo
+        // stream directly from Blink
         this._v.playDirect = config.play_direct ? config.play_direct : false;
 
         // ui configuration
