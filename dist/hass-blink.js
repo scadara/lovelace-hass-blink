@@ -637,7 +637,7 @@ class BlinkGlance extends LitElement {
             const battery = this.getState(this._s.batteryId, 'Unknown');
             this._s.batteryText  = 'Battery Strength: ' + battery.state;
             this._s.batteryIcon  = batteryPrefix + ( battery.state === 'Normal' ? '100' : '-outline');
-            this._s.batteryState = ( battery.state === 'Normal') ? '' : 'state-warn';
+            this._s.batteryState = ( battery.state === 'Normal' ? '' : 'state-warn');
         }
 
         if( this._v.signal === '' ) {
