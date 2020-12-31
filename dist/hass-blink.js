@@ -639,7 +639,7 @@ class BlinkGlance extends LitElement {
                 this._s.batteryIcon  = 'power-plug';
                 this._s.batteryState = 'state-update';
             } else {
-                const battery = this.getState(this._s.batteryId, 0);
+                const battery = this.getState(this._s.batteryId, 100);
                 const batteryPrefix = camera.attributes.charging ? 'battery-charging' : 'battery';
                 this._s.batteryText  = 'Battery Strength: ' + battery.state +'%';
                 this._s.batteryIcon  = batteryPrefix + ( battery.state < 10 ? '-outline' :
