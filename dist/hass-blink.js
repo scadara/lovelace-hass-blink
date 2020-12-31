@@ -634,18 +634,10 @@ class BlinkGlance extends LitElement {
 
         // SENSORS
         if( this._v.battery === '' ) {
-            if ( camera.attributes.wired_only ) {
-                this._s.batteryText  = 'Plugged In';
-                this._s.batteryIcon  = 'power-plug';
-                this._s.batteryState = 'state-update';
-            } else {
-                const battery = this.getState(this._s.batteryId, 0);
-                const batteryPrefix = camera.attributes.charging ? 'battery-charging' : 'battery';
-                this._s.batteryText  = 'Battery Strength: ' + battery.state +'%';
-                this._s.batteryIcon  = batteryPrefix + ( battery.state < 10 ? '-outline' :
-                                                    ( battery.state > 90 ? '' : '-' + Math.round(battery.state/10) + '0' ) );
-                this._s.batteryState = battery.state < 25 ? 'state-warn' : ( battery.state < 15 ? 'state-error' : 'state-update' );
-            }
+            const battery = this.getState(this._s.batteryId, 'Unknown');
+            this._s.batteryText  = 'Battery Strength: ' + battery.state;
+            this._s.batteryIcon  = batteryPrefix + ( battery.state === 'Normal' ? '100' : '-outline');
+            this._s.batteryState = (( battery.state === 'Normal') ? 'state-normal' : 'state-warn');
         }
 
         if( this._v.signal === '' ) {
