@@ -941,11 +941,11 @@ class BlinkGlance extends LitElement {
 
         // camera and sensors
         this._s.cameraId  = config.camera_id ? config.camera_id : 'camera.' + prefix + camera;
-        this._s.motionId  = config.motion_id ? config.motion_id : 'binary_sensor.' + prefix + camera +  'motion_detected';
-        this._s.batteryId = config.battery_id ? config.battery_id : 'sensor.' + prefix + camera + 'battery';
-        this._s.signalId  = config.signal_id ? config.signal_id : 'sensor.' + prefix + camera+  'wifi_signal';
-        this._s.captureId = config.capture_id ? config.capture_id : 'sensor.' + prefix + 'captured_today_' + camera;
-        this._s.isArmed    = config.armed ? config.armed : 'sensor.' + prefix + camera + 'armed';
+        this._s.motionId  = config.motion_id ? config.motion_id : 'binary_sensor.' + prefix + camera +  '_motion_detected';
+        this._s.batteryId = config.battery_id ? config.battery_id : 'sensor.' + prefix + camera + '_battery';
+        this._s.signalId  = config.signal_id ? config.signal_id : 'sensor.' + prefix + camera+  '_wifi_signal';
+        this._s.captureId = config.capture_id ? config.capture_id : 'sensor.' + prefix + '_captured_today_' + camera;
+        this._s.isArmed    = config.armed ? config.armed : 'sensor.' + prefix + camera + '_camera_armed';
 
         // door definition
         this._s.doorId     = config.door ? config.door: null;
