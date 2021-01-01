@@ -634,18 +634,13 @@ class BlinkGlance extends LitElement {
 
         // SENSORS
         if( this._v.battery === '' ) {
-            if ( camera.attributes.wired_only ) {
-                this._s.batteryText  = 'Plugged In';
-                this._s.batteryIcon  = 'power-plug';
-                this._s.batteryState = 'state-update';
-            } else {
-                const battery = this.getState(this._s.batteryId, 0);
-                const batteryPrefix = camera.attributes.charging ? 'battery-charging' : 'battery';
-                this._s.batteryText  = 'Battery Strength: ' + battery.state +'%';
-                this._s.batteryIcon  = batteryPrefix + ( battery.state < 10 ? '-outline' :
-                                                    ( battery.state > 90 ? '' : '-' + Math.round(battery.state/10) + '0' ) );
-                this._s.batteryState = battery.state < 25 ? 'state-warn' : ( battery.state < 15 ? 'state-error' : 'state-update' );
-            }
+			// const battery = this.getState(this._s.batteryId, 0);
+			// const batteryPrefix = camera.attributes.charging ? 'battery-charging' : 'battery';
+			const battPercentage = (this._s.batteryId.attributes.battery_voltage/180*100);
+			this._s.batteryText  = 'Battery Strength: ' + battPercentage +'%';
+			this._s.batteryIcon  = batteryPrefix + ( battPercentage < 10 ? '-outline' :
+												( battPercentage > 90 ? '' : '-' + Math.round(battPercentage/10) + '0' ) );
+			this._s.batteryState = battPercentage < 25 ? 'state-warn' : ( battPercentage < 15 ? 'state-error' : 'state-update' );
         }
 
         if( this._v.signal === '' ) {
@@ -942,7 +937,8 @@ class BlinkGlance extends LitElement {
         // camera and sensors
         this._s.cameraId  = config.camera_id ? config.camera_id : 'camera.' + prefix + camera;
         this._s.motionId  = config.motion_id ? config.motion_id : 'binary_sensor.' + prefix + camera +  '_motion_detected';
-        this._s.batteryId = config.battery_id ? config.battery_id : 'sensor.' + prefix + camera + '_battery';
+        this._s.batteryId = config.camera_id ? config.camera_id : 'camera.' + prefix + camera;
+		// this._s.batteryId = config.battery_id ? config.battery_id : 'sensor.' + prefix + camera + '_battery';
         this._s.signalId  = config.signal_id ? config.signal_id : 'sensor.' + prefix + camera+  '_wifi_signal';
         this._s.captureId = config.capture_id ? config.capture_id : 'sensor.' + prefix + '_captured_today_' + camera;
         this._s.isArmed    = config.armed ? config.armed : 'sensor.' + prefix + camera + '_camera_armed';
